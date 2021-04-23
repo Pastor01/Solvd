@@ -4,4 +4,5 @@ import com.solvd.projectSocialNetwork.model.Users;
 
 public interface IUsersDAO extends IGenericDAO<Users>{
 
+
 }

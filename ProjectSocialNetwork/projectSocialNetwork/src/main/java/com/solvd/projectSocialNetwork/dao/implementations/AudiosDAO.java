@@ -18,6 +18,7 @@ public class AudiosDAO extends MySQLDAO implements IAudioDAO {
 	private final String GET_AUDIO= "select * from Audios where id=?";
 	private final String REMOVE_AUDIO= "delete from Audios where id=?";
 	private final String SAVE_AUDIO= "insert into Audios(duration,multimediaId) values(?,?)";
+	private final String GET_AUDIO_FROM_MULTIMEDIA_ID= "select id from videos where id=?";
 	private Logger log = LogManager.getLogger(AudiosDAO.class);
 	
 	@Override
@@ -122,6 +123,37 @@ public class AudiosDAO extends MySQLDAO implements IAudioDAO {
 				log.error("Cant close",e);
 			}
 		}
+	}
+
+	@Override
+	public long getAudioFromMultimediaId(long id) {
+		long result = 0;
+		Connection c = null;
+		PreparedStatement pr = null;
+		ResultSet rset = null;
+        try {
+			c = cp.getConnection();
+			pr = c.prepareStatement(GET_AUDIO_FROM_MULTIMEDIA_ID);
+			pr.setLong(1,id);
+			rset = pr.executeQuery();
+			if(rset.next()) 
+				  result=(rset.getLong("id"));
+			
+			log.info("Audio retrived");
+		} catch (SQLException e) {
+			log.error("SQL Exception, can not get",e);
+		} catch (InterruptedException e) {
+			log.error("Cant get a connection",e);
+		}finally{
+			try {
+				pr.close();
+				rset.close();
+				cp.addConnection(c);
+			} catch (SQLException e) {
+				log.error("Cant close",e);
+			}		
+		}
+        return result;
 	}
 
 }

@@ -18,6 +18,7 @@ public class PhotoDAO extends MySQLDAO implements IPhotoDAO{
 	private final String GET_PHOTO= "select * from Photos where id=?";
 	private final String REMOVE_PHOTO= "delete from Photos where id=?";
 	private final String SAVE_PHOTO= "insert into Photos(resolution,multimediaId) values(?,?)";
+	private final String GET_PHOTO_FROM_MULTIMEDIA_ID= "select id from videos where id=?";
 	private Logger log = LogManager.getLogger(PhotoDAO.class);
 	
 	@Override
@@ -122,4 +123,35 @@ public class PhotoDAO extends MySQLDAO implements IPhotoDAO{
 				}
 			}
 		}
+
+	@Override
+	public long getPhotoFromMultimediaId(long id) {
+		long result = 0;
+		Connection c = null;
+		PreparedStatement pr = null;
+		ResultSet rset = null;
+        try {
+			c = cp.getConnection();
+			pr = c.prepareStatement(GET_PHOTO_FROM_MULTIMEDIA_ID);
+			pr.setLong(1,id);
+			rset = pr.executeQuery();
+			if(rset.next()) 
+				  result=(rset.getLong("id"));
+			
+			log.info("Video retrived");
+		} catch (SQLException e) {
+			log.error("SQL Exception, can not get",e);
+		} catch (InterruptedException e) {
+			log.error("Cant get a connection",e);
+		}finally{
+			try {
+				pr.close();
+				rset.close();
+				cp.addConnection(c);
+			} catch (SQLException e) {
+				log.error("Cant close",e);
+			}		
+		}
+        return result;
+	}
 }

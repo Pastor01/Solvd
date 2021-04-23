@@ -41,6 +41,9 @@ update userfriends set status= 4 where id = 1;
 update multimedia set name= 'Dark knight' where type = 'V';
 update posts set message='I like to relax a bit' where id = (select multimediaId from photos where id =1);
 update usergroups set title = 'Super League' where themes like '%crimes%';
+update multimedia set type= 'A' where name like 'Working';
+update users set name='Santiago' where id= 4;
+
 
 select name, lastname
 from users

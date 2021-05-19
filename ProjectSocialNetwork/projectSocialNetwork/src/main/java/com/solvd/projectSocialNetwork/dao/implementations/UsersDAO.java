@@ -20,7 +20,7 @@ public class UsersDAO extends MySQLDAO implements IUsersDAO{
 
 	private final String GET_USER= "select * from Users where id=?";
 	private final String REMOVE_USER= "delete from Users where id=?";
-	private final String SAVE_USER= "insert into Users(name,lastName,userName,registerAt,mobile) values(?,?,?,?,?)";
+	private final String SAVE_USER= "insert into Users(name,lastName,userName,registerAt,mobile,city) values(?,?,?,?,?,?)";
 	private Logger log = LogManager.getLogger(UsersDAO.class);
 	
 	@Override
@@ -37,6 +37,7 @@ public class UsersDAO extends MySQLDAO implements IUsersDAO{
 			pr.setString(3, s.getUserName());
 			pr.setDate(4, s.getRegisterAt());
 			pr.setInt(5, s.getMobile());
+			pr.setLong(6,s.getCity().getId());
 			
 			int rset= pr.executeUpdate();
 			
@@ -80,7 +81,7 @@ public class UsersDAO extends MySQLDAO implements IUsersDAO{
 			pr.setLong(1,id);
 			rset = pr.executeQuery();
 			if (rset.next())
-				p= new Users(rset.getLong("id"),rset.getString("name"),rset.getString("lastName"),rset.getString("userName"),rset.getDate("registerAt"),rset.getInt("mobile"),new ArrayList<Posts>(),new ArrayList<Users>());
+				p= new Users(rset.getLong("id"),rset.getString("name"),rset.getString("lastName"),rset.getString("userName"),rset.getDate("registerAt"),rset.getInt("mobile"),new ArrayList<Posts>(),new ArrayList<Users>(),null);
 					
 		} catch (SQLException e) {
 			log.error("SQL Exception, can not get",e);

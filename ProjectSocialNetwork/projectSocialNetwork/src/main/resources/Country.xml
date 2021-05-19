@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+
+<country id="1">
+   <name>Argentina</name>
+   <cities>
+	    <city id="1">
+	        <name>Mar del plata</name>
+	        <countriesId>1</countriesId>
+	 	</city>
+	    <city id="2">
+	   	    <name>Necochea</name>
+	   	    <countriesId>1</countriesId>
+		</city>
+		<city id="3">
+	     	<name>Tandil</name>
+	  		<countriesId>1</countriesId>
+		</city>
+   </cities>
+</country>

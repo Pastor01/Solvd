@@ -1,0 +1,6 @@
+2021-05-19 15:14:14 INFO  Main:29 - Starting parsing with SAX: 
+2021-05-19 15:14:14 INFO  Main:36 - Country [name=Argentina, cities=[City [name=Mar del plata, id=1], City [name=Necochea, id=2], City [name=Tandil, id=3]], id=1]
+2021-05-19 15:14:14 INFO  Main:43 - Starting parsing with JAXB: 
+2021-05-19 15:14:14 INFO  XmlValidation:22 - Validator Class: com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorImpl
+2021-05-19 15:14:14 INFO  XmlValidation:26 - Validation passed
+2021-05-19 15:14:14 INFO  Main:47 - Country [name=Argentina, cities=[City [name=Mar del plata, id=1], City [name=Necochea, id=2], City [name=Tandil, id=3]], id=1]

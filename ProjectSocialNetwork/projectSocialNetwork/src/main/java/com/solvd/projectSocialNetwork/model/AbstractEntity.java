@@ -1,7 +1,13 @@
 package com.solvd.projectSocialNetwork.model;
 
-public abstract class AbstractEntity {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public abstract class AbstractEntity {
+	
+	@XmlAttribute(name="id")
 	public long id;
 	
 	public AbstractEntity() {

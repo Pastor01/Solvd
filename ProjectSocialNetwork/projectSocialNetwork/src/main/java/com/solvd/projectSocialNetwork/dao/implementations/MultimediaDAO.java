@@ -19,7 +19,7 @@ public class MultimediaDAO extends MySQLDAO implements IMultimediaDAO{
 
 	private final String GET_MULTIMEDIA= "select * from ultimedia where id=?";
 	private final String REMOVE_MULTIMEDIA= "delete from multimedia where id=?";
-	private final String SAVE_MULTIMEDIA= "insert into multimedia(type,name,link,postId) values(?,?,?,?)";
+	private final String SAVE_MULTIMEDIA= "insert into multimedia(type,name,link,postId,metaInfo) values(?,?,?,?,?)";
 	private final String GET_MULTIMEDIA_FROM_POST_ID= "select id from multimedia where id=?";
 	private Logger log = LogManager.getLogger(MultimediaDAO.class);
 	
@@ -35,6 +35,7 @@ public class MultimediaDAO extends MySQLDAO implements IMultimediaDAO{
 			pr.setString(2,s.getName());
 			pr.setString(3,s.getLink());
 			pr.setLong(4,s.getPostId());
+			pr.setString(5,s.getMetaInfo());
 			
 			
 			int rset = pr.executeUpdate();
@@ -71,7 +72,7 @@ public class MultimediaDAO extends MySQLDAO implements IMultimediaDAO{
 			pr = c.prepareStatement(GET_MULTIMEDIA);
 			pr.setLong(1,id);
 			rset = pr.executeQuery();
-			if (rset.next()) mu= new Multimedia(rset.getLong("id"),rset.getString("type").charAt(0),rset.getString("name"),rset.getString("link"),rset.getLong("postId"));
+			if (rset.next()) mu= new Multimedia(rset.getLong("id"),rset.getString("type").charAt(0),rset.getString("name"),rset.getString("link"),rset.getLong("postId"),rset.getString("metaInfo"));
         } catch (SQLException e) {
 			log.error("SQL Exception, can not get",e);
 		} catch (InterruptedException e) {
@@ -113,8 +114,8 @@ public class MultimediaDAO extends MySQLDAO implements IMultimediaDAO{
 	}
 
 	@Override
-	public List<Long> getMultimediaFromPostId(long id) {
-		List<Long> result = new ArrayList<Long>();
+	public List<Multimedia> getMultimediaFromPostId(long id) {
+		List<Multimedia> result = new ArrayList<Multimedia>();
 		Connection c = null;
 		PreparedStatement pr = null;
 		ResultSet rset = null;
@@ -124,7 +125,7 @@ public class MultimediaDAO extends MySQLDAO implements IMultimediaDAO{
 			pr.setLong(1,id);
 			rset = pr.executeQuery();
 			while (rset.next()) {
-				  result.add(rset.getLong("id"));
+				  result.add(new Multimedia(rset.getLong("id"),rset.getString("type").charAt(0),rset.getString("name"),rset.getString("link"),rset.getLong("postId"),rset.getString("metaInfo")));
 			}
 			log.info("Multimedia retrived");
 		} catch (SQLException e) {

@@ -6,6 +6,7 @@ public class Multimedia extends AbstractEntity{
 	private String name;
 	private String link;
 	private long postId;
+	private String metaInfo;
 	
 	public Multimedia() {
 		super();
@@ -14,12 +15,13 @@ public class Multimedia extends AbstractEntity{
 		super(id);
 	}
 	
-	public Multimedia(long id,char type, String name, String link, long postId) {
+	public Multimedia(long id,char type, String name, String link, long postId, String metaInfo) {
 		super(id);
 		this.type = type;
 		this.name = name;
 		this.link = link;
 		this.postId = postId;
+		this.metaInfo=metaInfo;
 	}
 	public char getType() {
 		return type;
@@ -44,6 +46,12 @@ public class Multimedia extends AbstractEntity{
 	}
 	public void setPostId(long postId) {
 		this.postId = postId;
+	}
+	public String getMetaInfo() {
+		return metaInfo;
+	}
+	public void setMetaInfo(String metaInfo) {
+		this.metaInfo = metaInfo;
 	}
 	
 	

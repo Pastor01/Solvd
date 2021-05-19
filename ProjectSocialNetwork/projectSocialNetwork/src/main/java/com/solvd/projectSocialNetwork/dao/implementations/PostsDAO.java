@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -112,8 +113,8 @@ public class PostsDAO extends MySQLDAO implements IPostsDAO{
 	}
 
 	@Override
-	public long getPostFromUserId(long id) {
-		long result = 0;
+	public List<Posts> getPostFromUserId(long id) {
+		List<Posts> result = new ArrayList<Posts>();
 		Connection c = null;
 		PreparedStatement pr = null;
 		ResultSet rset = null;
@@ -123,7 +124,7 @@ public class PostsDAO extends MySQLDAO implements IPostsDAO{
 			pr.setLong(1,id);
 			rset = pr.executeQuery();
 			if(rset.next()) 
-				  result=(rset.getLong("id"));
+				  result.add(new Posts(rset.getLong("id"),rset.getString("message"),rset.getString("referenceLink"),rset.getLong("userId"),new ArrayList<Multimedia>()));
 			
 			log.info("Post retrived");
 		} catch (SQLException e) {

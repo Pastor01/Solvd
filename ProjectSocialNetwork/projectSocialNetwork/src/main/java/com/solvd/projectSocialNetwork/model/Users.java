@@ -12,12 +12,13 @@ public class Users extends AbstractEntity{
 	private int mobile;
 	private List<Posts> posts;
 	private List<Users> friends;
+	private City city;
 	
 	public Users() {
 		super();
 	}
 
-	public Users(long id,String name, String lastName, String userName, Date registerAt, int mobile, List<Posts> posts, List<Users> friends) {
+	public Users(long id,String name, String lastName, String userName, Date registerAt, int mobile, List<Posts> posts, List<Users> friends,City city) {
 		super(id);
 		this.name = name;
 		this.lastName = lastName;
@@ -26,6 +27,7 @@ public class Users extends AbstractEntity{
 		this.mobile = mobile;
 		this.posts=posts;
 		this.setFriends(friends);
+		this.city=city;
 	}
 
 	public String getName() {
@@ -73,7 +75,7 @@ public class Users extends AbstractEntity{
 		return "User [name=" + name + ", lastName=" + lastName + ", username="+ userName+ "]"; 
 	}
 
-	public void addMultimedia(Posts p) {
+	public void addPosts(Posts p) {
 		posts.add(p);
 		
 	}
@@ -96,6 +98,14 @@ public class Users extends AbstractEntity{
 
 	public void setFriends(List<Users> friends) {
 		this.friends = friends;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	

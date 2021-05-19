@@ -1,18 +1,18 @@
 package com.solvd.projectSocialNetwork.dao.implementations;
 
-import com.solvd.projectSocialNetwork.dao.ILoginDAO;
-import com.solvd.projectSocialNetwork.model.Logins;
+import com.solvd.projectSocialNetwork.dao.IServicesDAO;
+import com.solvd.projectSocialNetwork.model.Services;
 
-public class LoginsDAO extends MySQLDAO implements ILoginDAO{
+public class ServicesDAO extends MySQLDAO implements IServicesDAO{
 
 	@Override
-	public Logins save(Logins s) {
+	public Services save(Services s) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Logins getById(long id) {
+	public Services getById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
